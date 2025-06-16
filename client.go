@@ -14,7 +14,10 @@ type Client struct {
 
 func New(email, password string) *Client {
 	dialer := gomail.NewDialer("smtp.gmail.com", 587, email, password)
-	dialer.TLSConfig = &tls.Config{InsecureSkipVerify: false}
+	dialer.TLSConfig = &tls.Config{
+		InsecureSkipVerify: false,
+		ServerName:         "smtp.gmail.com",
+	}
 
 	return &Client{
 		email:    email,
